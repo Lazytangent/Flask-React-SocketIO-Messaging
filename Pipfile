@@ -12,6 +12,7 @@ flask-migrate = "*"
 sqlalchemy = "*"
 flask-cors = "*"
 python-dotenv = "*"
+flask-socketio = "*"
 
 [dev-packages]
 psycopg2-binary = "*"
