@@ -9,13 +9,12 @@ from flask_socketio import SocketIO, emit, send
 
 from .config import Config
 from .models import db, User
+from .socketio import socketio
 
 app = Flask(__name__)
 
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
-
-socketio = SocketIO(app)
 
 
 @login.user_loader
@@ -28,6 +27,7 @@ db.init_app(app)
 Migrate(app, db)
 socketio.init_app(app)
 CORS(app)
+
 
 @app.before_request
 def https_redirect():
