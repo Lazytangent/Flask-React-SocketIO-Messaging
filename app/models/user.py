@@ -11,6 +11,13 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
+    sent_messages = db.relationship('Message',
+                                    foreign_keys="messages.sender_id",
+                                    back_populates="sender")
+    received_messages = db.relationship('Message',
+                                        foreign_keys="messages.recipient_id",
+                                        back_populates="recipient")
+
     @property
     def password(self):
         return self.hashed_password
@@ -23,6 +30,21 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "sent_messages": {
+                message.id: message.to_simple_dict()
+                for message in self.sent_messages
+            },
+            "received_messages": {
+                message.id: message.to_simple_dict()
+                for message in self.received_messages
+            },
+        }
+
+    def to_simple_dict(self):
         return {
             "id": self.id,
             "username": self.username,
