@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 
 from app.forms import CreateMessage
 from app.models import db, Message
@@ -15,7 +15,13 @@ def get_messages():
 @message_routes.route('/<int:message_id>', methods=["PUT"])
 def update_message(message_id):
     message = Message.query.all()
-
+    form = CreateMessage()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        message.body = form['body'].data
+        db.session.commit()
+        return message.to_dict()
+    return {'errors': form.errors}
 
 
 @message_routes.route('/<int:message_id>', methods=['DELETE'])
