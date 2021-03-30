@@ -7,6 +7,7 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 from flask_socketio import SocketIO, emit, send
 
+from .api import (auth_routes)
 from .config import Config
 from .models import db, User
 from .socketio import socketio
@@ -27,6 +28,8 @@ db.init_app(app)
 Migrate(app, db)
 socketio.init_app(app)
 CORS(app)
+
+app.register_blueprint(auth_routes, url_prefix='/api/auth')
 
 
 @app.before_request
