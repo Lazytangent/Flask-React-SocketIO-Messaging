@@ -26,6 +26,19 @@ export const getMessages = (userId) => async (dispatch) => {
   return messages;
 };
 
+export const getMessage = (messageId) => async (dispatch) => {
+  const res = await fetch(`/api/messages/${messageId}`);
+  const mesage = await res.json();
+  if (!message.errors) {
+    dispatch(setMessage(message));
+  }
+  return message;
+};
+
+export const sendMessage = (messageData) => {
+  // SocketIO logic?
+}
+
 const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MESSAGES:
