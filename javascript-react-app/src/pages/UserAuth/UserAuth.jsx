@@ -57,8 +57,12 @@ const UserAuth = () => {
     return (
       <>
         <FormHeader heading='Signup' />
+        <FormErrors errors={errors} />
         <FormField type='text' name='username' placeholder='Username' required={true} value={username} onChange={updateUsername} />
         <FormField type='email' name='email' placeholder='Email' required={true} value={email} onChange={updateEmail} />
+        <FormField type='password' name='password' placeholder='Password' required={true} value={password} onChange={updatePassword} />
+        <FormField type='password' name='confirmPassword' placeholder='Confirm Password' required={true} value={confirmPassword} onChange={updateConfirmPassword} />
+        <Button label="Signup" />
       </>
     )
   }
