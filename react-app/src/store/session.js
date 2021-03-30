@@ -46,10 +46,12 @@ export const logout = () => async (dispatch) => {
   if (res.ok) {
     dispatch(removeSession());
   }
-  return await res.json();
+  return res.json();
 };
 
-export const signUp = (username, email, password, confirm_password) => async (dispatch) => {
+export const signUp = (username, email, password, confirmPassword) => async (
+  dispatch,
+) => {
   const res = await fetch('/api/auth/signup', {
     method: 'POST',
     headers: {
@@ -59,7 +61,7 @@ export const signUp = (username, email, password, confirm_password) => async (di
       username,
       email,
       password,
-      confirm_password,
+      confirm_password: confirmPassword,
     }),
   });
   const user = await res.json();
