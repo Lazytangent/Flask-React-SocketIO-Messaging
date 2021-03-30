@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
 import { login, signUp } from '../../store/session';
@@ -11,13 +11,12 @@ import Button from '../../components/Button';
 const UserAuth = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
 
-  const [credential, setCredential] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [credential, setCredential] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
   const updateCredential = (e) => {
@@ -40,42 +39,85 @@ const UserAuth = () => {
     setUsername(e.target.value);
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    let user;
+    let userData;
     if (location.pathname === '/login') {
-      user = await dispatch(login(credential, password));
+      userData = await dispatch(login(credential, password));
     } else {
-      user = await dispatch(signUp(username, email, password, confirmPassword));
+      userData = await dispatch(
+        signUp(username, email, password, confirmPassword),
+      );
     }
-    if (user.errors) {
-      setErrors(user.errors);
+    if (userData.errors) {
+      setErrors(userData.errors);
     }
   };
 
   if (location.pathname === '/login') {
     return (
       <form onSubmit={submitHandler}>
-        <FormHeader heading='Login' />
+        <FormHeader heading="Login" />
         <FormErrors errors={errors} />
-        <FormField type='text' name='credential' placeholder='Username or Email' required={true} value={credential} onChange={updateCredential} />
-        <FormField type='password' name='password' placeholder='Password' required={true} value={password} onChange={updatePassword} />
+        <FormField
+          type="text"
+          name="credential"
+          placeholder="Username or Email"
+          required
+          value={credential}
+          onChange={updateCredential}
+        />
+        <FormField
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+          value={password}
+          onChange={updatePassword}
+        />
         <Button label="Login" />
       </form>
-    )
-  } else if (location.pathname === '/signup') {
-    return (
-      <form onSubmit={submitHandler}>
-        <FormHeader heading='Signup' />
-        <FormErrors errors={errors} />
-        <FormField type='text' name='username' placeholder='Username' required={true} value={username} onChange={updateUsername} />
-        <FormField type='email' name='email' placeholder='Email' required={true} value={email} onChange={updateEmail} />
-        <FormField type='password' name='password' placeholder='Password' required={true} value={password} onChange={updatePassword} />
-        <FormField type='password' name='confirmPassword' placeholder='Confirm Password' required={true} value={confirmPassword} onChange={updateConfirmPassword} />
-        <Button label="Signup" />
-      </form>
-    )
+    );
   }
+  return (
+    <form onSubmit={submitHandler}>
+      <FormHeader heading="Signup" />
+      <FormErrors errors={errors} />
+      <FormField
+        type="text"
+        name="username"
+        placeholder="Username"
+        required
+        value={username}
+        onChange={updateUsername}
+      />
+      <FormField
+        type="email"
+        name="email"
+        placeholder="Email"
+        required
+        value={email}
+        onChange={updateEmail}
+      />
+      <FormField
+        type="password"
+        name="password"
+        placeholder="Password"
+        required
+        value={password}
+        onChange={updatePassword}
+      />
+      <FormField
+        type="password"
+        name="confirmPassword"
+        placeholder="Confirm Password"
+        required
+        value={confirmPassword}
+        onChange={updateConfirmPassword}
+      />
+      <Button label="Signup" />
+    </form>
+  );
 };
 
 export default UserAuth;
