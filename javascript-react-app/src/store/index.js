@@ -5,9 +5,11 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
 import sessionReducer from './session';
+import messagesReducer from './messages';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  messages: messagesReducer,
 });
 
 let enhancer;
