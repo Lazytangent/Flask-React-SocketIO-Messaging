@@ -9,12 +9,14 @@ import reportWebVitals from './reportWebVitals';
 import configureStore from './store';
 
 import * as sessionActions from './store/session';
+import * as messageActions from './store/messages';
 
 const store = configureStore();
 
 if (process.env.NODE_ENV !== 'production') {
   window.store = store;
   window.sessionActions = sessionActions;
+  window.messageActions = messageActions;
 }
 
 const Root = () => (
