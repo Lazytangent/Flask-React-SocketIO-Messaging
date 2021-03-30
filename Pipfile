@@ -15,6 +15,7 @@ python-dotenv = "*"
 flask-socketio = "*"
 flask-wtf = "*"
 wtforms = "*"
+email-validator = "*"
 
 [dev-packages]
 psycopg2-binary = "*"

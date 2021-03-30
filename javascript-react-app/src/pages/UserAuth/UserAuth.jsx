@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, Redirect } from 'react-router-dom';
 
 import { login, signUp } from '../../store/session';
 import FormHeader from '../../components/FormHeader';
@@ -11,6 +11,7 @@ import Button from '../../components/Button';
 const UserAuth = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
 
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
@@ -53,6 +54,10 @@ const UserAuth = () => {
       setErrors(userData.errors);
     }
   };
+
+  if (user) {
+    return <Redirect to="/" />;
+  }
 
   if (location.pathname === '/login') {
     return (
