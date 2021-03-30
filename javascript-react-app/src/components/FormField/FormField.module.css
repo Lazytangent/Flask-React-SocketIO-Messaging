@@ -1,0 +1,9 @@
+.input {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  outline-style: none;
+}
+
+.input:focus {
+  border-color: green;
+}
