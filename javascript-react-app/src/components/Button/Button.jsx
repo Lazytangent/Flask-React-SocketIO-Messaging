@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import styles from './Button.module.css';
 
-const Button = ({ className, label }) => (
-  <button type="submit" className={`${className} ${styles.button}`}>
+const Button = ({ className, label, onClick }) => (
+  <button type="submit" onClick={onClick} className={`${className} ${styles.button}`}>
     {label}
   </button>
 );
@@ -12,11 +12,13 @@ const Button = ({ className, label }) => (
 Button.defaultProps = {
   className: '',
   label: 'Button',
+  onClick: () => null,
 };
 
 Button.propTypes = {
   className: PropTypes.string,
   label: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default Button;
