@@ -10,7 +10,7 @@ import Button from '../Button';
 const MessageForm = () => {
   const dispatch = useDispatch();
 
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [errors, setErrors] = useState([]);
 
   const updateMessage = (e) => {
@@ -19,16 +19,24 @@ const MessageForm = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const response = await dispatch(sendMessage({ message, }));
+    const response = dispatch(sendMessage({ message }));
     if (response.errors) {
       setErrors(response.errors);
     }
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <FormField type='text' name='message' placeholder='Write a message...' required={true} value={message} onChange={updateMessage} />
-      <Button label='Send' />
+    <form onSubmit={submitHandler} className={styles.form}>
+      <FormErrors errors={errors} />
+      <FormField
+        type="text"
+        name="message"
+        placeholder="Write a message..."
+        required
+        value={message}
+        onChange={updateMessage}
+      />
+      <Button label="Send" />
     </form>
   );
 };
