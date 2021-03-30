@@ -1,8 +1,10 @@
 import React from 'react';
 
+import MessageContainer from '../../components/MessageContainer';
+
 const Messenger = () => (
   <>
-    <h3>Placeholder for Messenger</h3>
+    <MessageContainer />
   </>
 );
 
