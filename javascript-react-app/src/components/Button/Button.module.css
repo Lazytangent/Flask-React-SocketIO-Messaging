@@ -1,0 +1,10 @@
+.button {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition-timing-function: ease-in-out;
+  transition-duration: 500ms;
+}
+
+.button:hover {
+  background-color: green;
+}
