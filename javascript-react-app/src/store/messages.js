@@ -28,16 +28,31 @@ export const getMessages = (userId) => async (dispatch) => {
 
 export const getMessage = (messageId) => async (dispatch) => {
   const res = await fetch(`/api/messages/${messageId}`);
-  const mesage = await res.json();
+  const message = await res.json();
   if (!message.errors) {
     dispatch(setMessage(message));
   }
   return message;
 };
 
-export const sendMessage = (messageData) => {
+export const sendMessage = () => {
   // SocketIO logic?
-}
+};
+
+export const deleteMessage = (messageId) => async (dispatch) => {
+  const res = await fetch(`/api/messages/${messageId}`, {
+    method: 'DELETE',
+  });
+  const data = await res.json();
+  if (!data.errors) {
+    dispatch(removeMessage(messageId));
+  }
+  return data;
+};
+
+const initialState = {
+  messages: {},
+};
 
 const messagesReducer = (state = initialState, action) => {
   switch (action.type) {

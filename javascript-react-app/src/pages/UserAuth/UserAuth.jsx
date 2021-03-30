@@ -43,9 +43,9 @@ const UserAuth = () => {
     e.preventDefault();
     let userData;
     if (location.pathname === '/login') {
-      userData = await dispatch(login(credential, password));
+      userData = dispatch(login(credential, password));
     } else {
-      userData = await dispatch(
+      userData = dispatch(
         signUp(username, email, password, confirmPassword),
       );
     }

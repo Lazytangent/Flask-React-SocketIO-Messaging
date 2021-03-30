@@ -19,7 +19,7 @@ const NavBar = () => {
       <NavLink to="/" exact>
         Home
       </NavLink>
-      {user ? (
+      {!user ? (
         <>
           <NavLink to="/login">Login</NavLink>
           <NavLink to="/signup">Signup</NavLink>
