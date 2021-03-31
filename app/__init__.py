@@ -5,12 +5,11 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
-from flask_socketio import SocketIO, emit, send
 
 from .api import (auth_routes, message_routes, user_routes)
 from .config import Config
 from .models import db, User
-from .socketio import socketio
+from .socketio.socketio import socketio
 
 app = Flask(__name__)
 
