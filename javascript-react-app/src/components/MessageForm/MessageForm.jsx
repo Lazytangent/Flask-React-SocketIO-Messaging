@@ -42,7 +42,7 @@ const MessageForm = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    sendMessage(e.target.value);
+    sendMessage(message);
   };
 
   return (
