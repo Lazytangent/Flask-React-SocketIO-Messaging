@@ -9,6 +9,7 @@ from flask_login import LoginManager
 from .api import (auth_routes, message_routes, user_routes)
 from .config import Config
 from .models import db, User
+from .seeds import seed_commands
 from .socketio.socketio import socketio
 
 app = Flask(__name__)
@@ -21,6 +22,8 @@ login.login_view = 'auth.unauthorized'
 def load_user(id):
     return User.query.get(int(id))
 
+
+app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
 db.init_app(app)
