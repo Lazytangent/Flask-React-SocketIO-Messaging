@@ -6,8 +6,9 @@ import {
   initiateSocket,
   disconnectSocket,
   subscribeToChat,
+  sendMessage,
 } from '../../socketIO';
-import { sendMessage } from '../../store/messages';
+import { receiveMessage } from '../../store/messages';
 import FormField from '../FormField';
 import FormErrors from '../FormErrors';
 import Button from '../Button';
@@ -23,8 +24,8 @@ const MessageForm = () => {
     if (!socket) {
       setSocket(initiateSocket());
       subscribeToChat((err, data) => {
-        if (err) return;
-        console.log(data);
+        if (err) setErrors(err);
+        dispatch(receiveMessage(data));
       });
       return () => {
         disconnectSocket();
@@ -40,10 +41,7 @@ const MessageForm = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const response = dispatch(sendMessage(socket, { message }));
-    if (response.errors) {
-      setErrors(response.errors);
-    }
+    sendMessage(e.target.value);
   };
 
   return (
