@@ -1,4 +1,6 @@
 from flask_socketio import emit
+
+from app.models import db, Message
 from .socketio import socketio
 
 
