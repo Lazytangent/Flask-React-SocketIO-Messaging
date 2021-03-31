@@ -36,7 +36,6 @@ export const getMessage = (messageId) => async (dispatch) => {
 };
 
 export const sendMessage = (socket, message) => async (dispatch) => {
-  // SocketIO logic?
   if (socket) {
     socket.emit('message', { message });
   }
