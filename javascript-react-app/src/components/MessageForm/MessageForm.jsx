@@ -17,14 +17,21 @@ const MessageForm = () => {
 
   const [message, setMessage] = useState('');
   const [errors, setErrors] = useState([]);
+  const [socket, setSocket] = useState();
 
   useEffect(() => {
-    initiateSocket();
-    subscribeToChat((err, data) => {
-      if (err) return;
-      console.log(data);
-    });
-    return () => disconnectSocket();
+    if (!socket) {
+      setSocket(initiateSocket());
+      subscribeToChat((err, data) => {
+        if (err) return;
+        console.log(data);
+      });
+      return () => {
+        disconnectSocket();
+        setSocket();
+      };
+    }
+    return null;
   }, []);
 
   const updateMessage = (e) => {
@@ -33,7 +40,7 @@ const MessageForm = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const response = dispatch(sendMessage({ message }));
+    const response = dispatch(sendMessage(socket, { message }));
     if (response.errors) {
       setErrors(response.errors);
     }

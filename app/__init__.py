@@ -27,7 +27,7 @@ app.config.from_object(Config)
 db.init_app(app)
 Migrate(app, db)
 socketio.init_app(app)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(message_routes, url_prefix='/api/messages')
