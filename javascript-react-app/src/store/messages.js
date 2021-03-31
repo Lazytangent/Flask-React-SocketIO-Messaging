@@ -35,8 +35,11 @@ export const getMessage = (messageId) => async (dispatch) => {
   return message;
 };
 
-export const sendMessage = () => {
+export const sendMessage = (socket, message) => {
   // SocketIO logic?
+  if (socket) {
+    socket.emit('message', { message });
+  }
 };
 
 export const deleteMessage = (messageId) => async (dispatch) => {

@@ -15,7 +15,8 @@ export const disconnectSocket = () => {
 
 export const subscribeToChat = (cb) => {
   if (!socket) return true;
-  socket.on('message', msg => {
+
+  socket.on('message', (msg) => {
     console.log('Websocket event received!');
     return cb(null, msg);
   });

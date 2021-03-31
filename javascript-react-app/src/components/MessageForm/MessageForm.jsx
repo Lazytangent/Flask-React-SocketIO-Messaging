@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import styles from './MessageForm.module.css';
+import {
+  initiateSocket,
+  disconnectSocket,
+  subscribeToChat,
+} from '../../socketIO';
 import { sendMessage } from '../../store/messages';
 import FormField from '../FormField';
 import FormErrors from '../FormErrors';
@@ -12,6 +17,15 @@ const MessageForm = () => {
 
   const [message, setMessage] = useState('');
   const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    initiateSocket();
+    subscribeToChat((err, data) => {
+      if (err) return;
+      console.log(data);
+    });
+    return () => disconnectSocket();
+  }, []);
 
   const updateMessage = (e) => {
     setMessage(e.target.value);
