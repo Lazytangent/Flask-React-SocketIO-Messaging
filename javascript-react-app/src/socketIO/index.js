@@ -23,6 +23,6 @@ export const subscribeToChat = (cb) => {
   });
 };
 
-export const sendMessage = (message) => {
-  if (socket) socket.emit('message', { message });
+export const sendMessage = (body) => {
+  if (socket) socket.emit('message', { body });
 };
