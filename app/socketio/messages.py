@@ -1,3 +1,4 @@
+from flask import jsonify
 from flask_socketio import emit
 
 from app.models import db, Message
@@ -10,4 +11,4 @@ def handle_message(data):
     db.session.add(message)
     db.session.commit()
 
-    emit('message', message)
+    emit('message', message.to_dict())
