@@ -10,4 +10,4 @@ def handle_message(data):
     db.session.add(message)
     db.session.commit()
 
-    emit('message', data)
+    emit('message', message)
