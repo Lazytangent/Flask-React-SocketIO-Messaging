@@ -1,1 +1,2 @@
-from .socketio import socketio
+import app.socketio.socketio
+import app.socketio.messages

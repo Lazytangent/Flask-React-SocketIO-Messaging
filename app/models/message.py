@@ -30,15 +30,17 @@ class Message(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
+            "body": self.body,
             "sender": self.sender.to_simple_dict(),
             "recipient": self.recipient.to_simple_dict(),
-            "created_at": self.created_at,
+            "created_at": str(self.created_at),
         }
 
     def to_simple_dict(self):
         return {
             "id": self.id,
+            "body": self.body,
             "sender": self.sender.username,
             "recipient": self.recipient.username,
-            "created_at": self.created_at,
+            "created_at": str(self.created_at),
         }

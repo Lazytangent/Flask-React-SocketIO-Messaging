@@ -7,7 +7,7 @@ const Message = ({ message }) => (
   <div className={styles.div}>
     <p>{message.body}</p>
     <hr />
-    <p>{message.sender}</p>
+    <p>{message.sender.username}</p>
     <p>{message.created_at}</p>
   </div>
 );

@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import styles from './MessageForm.module.css';
-import { sendMessage } from '../../store/messages';
+import {
+  initiateSocket,
+  disconnectSocket,
+  subscribeToChat,
+  sendMessage,
+} from '../../socketIO';
+import { receiveMessage } from '../../store/messages';
 import FormField from '../FormField';
 import FormErrors from '../FormErrors';
 import Button from '../Button';
@@ -10,8 +16,25 @@ import Button from '../Button';
 const MessageForm = () => {
   const dispatch = useDispatch();
 
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [errors, setErrors] = useState([]);
+  const [socket, setSocket] = useState();
+
+  useEffect(() => {
+    if (!socket) {
+      setSocket(initiateSocket());
+      subscribeToChat((err, data) => {
+        if (err) setErrors(err);
+        console.log(data);
+        dispatch(receiveMessage(data));
+      });
+      return () => {
+        disconnectSocket();
+        setSocket();
+      };
+    }
+    return null;
+  }, []);
 
   const updateMessage = (e) => {
     setMessage(e.target.value);
@@ -19,16 +42,26 @@ const MessageForm = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const response = await dispatch(sendMessage({ message, }));
-    if (response.errors) {
-      setErrors(response.errors);
-    }
+    const data = {
+      body: message,
+      sender_id: 1,
+      recipient_id: 2,
+    };
+    sendMessage(data);
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <FormField type='text' name='message' placeholder='Write a message...' required={true} value={message} onChange={updateMessage} />
-      <Button label='Send' />
+    <form onSubmit={submitHandler} className={styles.form}>
+      <FormErrors errors={errors} />
+      <FormField
+        type="text"
+        name="message"
+        placeholder="Write a message..."
+        required
+        value={message}
+        onChange={updateMessage}
+      />
+      <Button label="Send" />
     </form>
   );
 };

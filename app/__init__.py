@@ -5,12 +5,12 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
-from flask_socketio import SocketIO, emit, send
 
 from .api import (auth_routes, message_routes, user_routes)
 from .config import Config
 from .models import db, User
-from .socketio import socketio
+from .seeds import seed_commands
+from .socketio.socketio import socketio
 
 app = Flask(__name__)
 
@@ -23,11 +23,13 @@ def load_user(id):
     return User.query.get(int(id))
 
 
+app.cli.add_command(seed_commands)
+
 app.config.from_object(Config)
 db.init_app(app)
 Migrate(app, db)
 socketio.init_app(app)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(message_routes, url_prefix='/api/messages')
