@@ -43,9 +43,9 @@ const MessageForm = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     const data = {
-      message,
-      senderId: 1,
-      recipientId: 2,
+      body: message,
+      sender_id: 1,
+      recipient_id: 2,
     };
     sendMessage(data);
   };
