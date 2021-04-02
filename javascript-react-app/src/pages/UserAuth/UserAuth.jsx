@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, Redirect } from 'react-router-dom';
 
+import styles from './UserAuth.module.css';
 import { login, signUp } from '../../store/session';
 import FormHeader from '../../components/FormHeader';
 import FormErrors from '../../components/FormErrors';
@@ -61,7 +62,7 @@ const UserAuth = () => {
 
   if (location.pathname === '/login') {
     return (
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className={styles.form}>
         <FormHeader heading="Login" />
         <FormErrors errors={errors} />
         <FormField
