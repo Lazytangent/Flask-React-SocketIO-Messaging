@@ -14,6 +14,14 @@ from .socketio.socketio import socketio
 
 app = Flask(__name__)
 
+app.cli.add_command(seed_commands)
+
+app.config.from_object(Config)
+db.init_app(app)
+Migrate(app, db)
+socketio.init_app(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
+
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
 
@@ -22,14 +30,6 @@ login.login_view = 'auth.unauthorized'
 def load_user(id):
     return User.query.get(int(id))
 
-
-app.cli.add_command(seed_commands)
-
-app.config.from_object(Config)
-db.init_app(app)
-Migrate(app, db)
-socketio.init_app(app)
-CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(message_routes, url_prefix='/api/messages')

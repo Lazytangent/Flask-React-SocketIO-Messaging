@@ -14,7 +14,7 @@ const FormField = ({
 }) => {
   if (required) {
     return (
-      <>
+      <div className={styles.formDiv}>
         <input
           className={`${className || ''} ${styles.input}`}
           required
@@ -24,11 +24,11 @@ const FormField = ({
           value={value}
           onChange={onChange}
         />
-      </>
+      </div>
     );
   }
   return (
-    <>
+    <div className={styles.formDiv}>
       <input
         className={`${className || ''} ${styles.input}`}
         type={type}
@@ -37,7 +37,7 @@ const FormField = ({
         value={value}
         onChange={onChange}
       />
-    </>
+    </div>
   );
 };
 

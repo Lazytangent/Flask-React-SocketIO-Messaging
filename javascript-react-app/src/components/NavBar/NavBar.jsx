@@ -20,10 +20,10 @@ const NavBar = () => {
         Home
       </NavLink>
       {!user ? (
-        <>
-          <NavLink to="/login">Login</NavLink>
-          <NavLink to="/signup">Signup</NavLink>
-        </>
+        <div className={styles.unauthContainer}>
+          <NavLink to="/login" className={styles.mx2}>Login</NavLink>
+          <NavLink to="/signup" className={styles.mx2}>Signup</NavLink>
+        </div>
       ) : (
         <>
           <Button onClick={logoutUser} label="Logout" />
