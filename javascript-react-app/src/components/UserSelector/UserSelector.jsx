@@ -5,7 +5,6 @@ import styles from './UserSelector.module.css';
 import { getUsers } from '../../store/users';
 import {
   setConverationUser,
-  removeConversationUser,
   useUserContext,
 } from '../../context/UserContext';
 
@@ -13,7 +12,7 @@ const UserSelector = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => Object.values(state.users));
 
-  const { userState, userDispatch } = useUserContext();
+  const { userDispatch } = useUserContext();
 
   useEffect(() => {
     dispatch(getUsers());
