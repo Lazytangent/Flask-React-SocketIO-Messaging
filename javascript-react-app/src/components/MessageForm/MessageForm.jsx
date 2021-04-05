@@ -29,7 +29,6 @@ const MessageForm = () => {
       setSocket(initiateSocket());
       subscribeToChat((err, data) => {
         if (err) setErrors(err);
-        console.log(data);
         dispatch(receiveMessage(data));
       });
       return () => {
