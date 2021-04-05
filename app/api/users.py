@@ -30,7 +30,7 @@ def get_users_messages(user_id):
 def get_conversation(user_id, other_user_id):
     messages_from_user = Message.query.filter(
         Message.sender_id == user_id,
-        Message.receiver_id == other_user_id).all()
+        Message.recipient_id == other_user_id).all()
     messages_to_user = Message.query.filter(
         Message.sender_id == other_user_id,
         Message.recipient_id == user_id).all()

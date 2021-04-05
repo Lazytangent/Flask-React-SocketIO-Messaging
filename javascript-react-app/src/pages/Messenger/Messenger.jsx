@@ -7,8 +7,8 @@ import UserSelector from '../../components/UserSelector';
 const Messenger = () => (
   <>
     <UserSelector />
-    <MessageContainer />
     <MessageForm />
+    <MessageContainer />
   </>
 );
 

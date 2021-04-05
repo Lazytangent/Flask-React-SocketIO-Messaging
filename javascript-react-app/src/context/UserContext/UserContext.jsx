@@ -15,7 +15,7 @@ const UserReducer = (state, action) => {
 };
 
 const initialState = {
-  currentUser: null,
+  user: null,
 };
 
 const UserContext = createContext();
