@@ -24,10 +24,12 @@ const UserSelector = () => {
 
   return (
     <>
-      <h3>Placeholder for UserSelector</h3>
-      {users.map((user) => (
-        <button onClick={() => userClick(user)} className={styles.userHeading} type="button">{user.username}</button>
-      ))}
+      <h3 className={styles.heading}>Select a User to Message</h3>
+      <div className={styles.usersDiv}>
+        {users.map((user) => (
+          <button key={user.id} onClick={() => userClick(user)} className={styles.userHeading} type="button">{user.username}</button>
+        ))}
+      </div>
     </>
   );
 };
