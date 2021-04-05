@@ -15,7 +15,16 @@ const Message = ({ message }) => (
 Message.defaultProps = {
   message: {
     body: '',
-    sender: '',
+    sender: {
+      id: 1,
+      username: '',
+      email: '',
+    },
+    recipient: {
+      id: 2,
+      username: '',
+      email: '',
+    },
     created_at: '',
   },
 };
@@ -23,7 +32,16 @@ Message.defaultProps = {
 Message.propTypes = {
   message: PropTypes.shape({
     body: PropTypes.string,
-    sender: PropTypes.string,
+    sender: PropTypes.shape({
+      id: PropTypes.number,
+      username: PropTypes.string,
+      email: PropTypes.string,
+    }),
+    recipient: PropTypes.shape({
+      id: PropTypes.number,
+      username: PropTypes.string,
+      email: PropTypes.string,
+    }),
     created_at: PropTypes.string,
   }),
 };

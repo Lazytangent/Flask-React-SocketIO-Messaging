@@ -6,10 +6,12 @@ import logger from 'redux-logger';
 
 import sessionReducer from './session';
 import messagesReducer from './messages';
+import usersReducer from './users';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   messages: messagesReducer,
+  users: usersReducer,
 });
 
 let enhancer;
