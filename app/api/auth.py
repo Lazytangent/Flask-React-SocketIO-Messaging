@@ -8,7 +8,7 @@ from app.models import db, User
 auth_routes = Blueprint('auth', __name__)
 
 
-@auth_routes.route('/')
+@auth_routes.route('')
 def authenticate():
     """
     Authenticates a user.
