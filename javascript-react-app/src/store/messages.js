@@ -17,8 +17,8 @@ const removeMessage = (messageId) => ({
   messageId,
 });
 
-export const getMessages = (userId) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}/messages`);
+export const getMessages = (userId, otherUserId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/messages/${otherUserId}`);
   const messages = await res.json();
   if (!messages.errors) {
     dispatch(setMessages(messages));
