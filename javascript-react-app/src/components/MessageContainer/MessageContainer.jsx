@@ -23,7 +23,7 @@ const MessageContainer = () => {
 
   return (
     <div className={styles.div}>
-      {Object.values(messages).map((message) => (
+      {messages.map((message) => (
         <Message message={message} key={message.id} />
       ))}
     </div>
