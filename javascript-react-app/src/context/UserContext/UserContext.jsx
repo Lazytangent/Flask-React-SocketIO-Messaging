@@ -1,8 +1,17 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
-const UsersReducer = (state, action) => {
+import { SET_CONVERSATION_USER, REMOVE_CONVERSATION_USER } from '../constants';
 
+const UsersReducer = (state, action) => {
+  switch (action.type) {
+    case SET_CONVERSATION_USER:
+      return { user: action.user };
+    case REMOVE_CONVERSATION_USER:
+      return { user: null };
+    default:
+      return state;
+  }
 };
 
 const initialState = {
@@ -11,10 +20,11 @@ const initialState = {
 
 const UsersContext = createContext();
 
-export const useUsersContext = () => useContext(UsersContext);
+const useUsersContext = () => useContext(UsersContext);
 
 const UsersProvider = ({ children }) => {
   const [usersState, dispatch] = useReducer(UsersReducer, initialState);
+
   return (
     <UsersContext.Provider value={{ usersState, dispatch }}>
       {children}
@@ -29,5 +39,7 @@ UsersProvider.defaultProps = {
 UsersProvider.propTypes = {
   children: PropTypes.node,
 };
+
+export { useUsersContext };
 
 export default UsersProvider;
