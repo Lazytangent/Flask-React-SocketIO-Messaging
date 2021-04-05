@@ -23,10 +23,10 @@ const UserContext = createContext();
 const useUserContext = () => useContext(UserContext);
 
 const UserProvider = ({ children }) => {
-  const [usersState, dispatch] = useReducer(UserReducer, initialState);
+  const [userState, userDispatch] = useReducer(UserReducer, initialState);
 
   return (
-    <UserContext.Provider value={{ usersState, dispatch }}>
+    <UserContext.Provider value={{ userState, userDispatch }}>
       {children}
     </UserContext.Provider>
   );
