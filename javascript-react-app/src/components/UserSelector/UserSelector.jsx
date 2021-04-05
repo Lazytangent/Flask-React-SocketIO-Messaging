@@ -2,6 +2,11 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getUsers } from '../../store/users';
+import {
+  setConverationUser,
+  removeConversationUser,
+  useUserContext,
+} from '../../context/UserContext';
 
 const UserSelector = () => {
   const dispatch = useDispatch();
