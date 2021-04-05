@@ -1,6 +1,6 @@
-import UsersProvider, { useUsersContext } from './UserContext';
+import UserProvider, { useUserContext } from './UserContext';
 import { setConverationUser, removeConversationUser } from './actions';
 
-export { useUsersContext, setConverationUser, removeConversationUser };
+export { useUserContext, setConverationUser, removeConversationUser };
 
-export default UsersProvider;
+export default UserProvider;
