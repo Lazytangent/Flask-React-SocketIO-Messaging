@@ -23,6 +23,11 @@ const MessageContainer = () => {
 
   return (
     <div className={styles.div}>
+      <h3>
+        Currently messaging
+        {' '}
+        {userState.user.username}
+      </h3>
       {messages.map((message) => (
         <Message message={message} key={message.id} />
       ))}
