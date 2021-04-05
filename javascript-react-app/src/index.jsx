@@ -7,6 +7,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import configureStore from './store';
+import UserProvider from './context/UserContext';
 
 import * as sessionActions from './store/session';
 import * as messageActions from './store/messages';
@@ -22,7 +23,9 @@ if (process.env.NODE_ENV !== 'production') {
 const Root = () => (
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </Provider>
   </BrowserRouter>
 );
