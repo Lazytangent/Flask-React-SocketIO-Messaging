@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
-import { SET_CONVERSATION_USER, REMOVE_CONVERSATION_USER } from '../constants';
+import { SET_CONVERSATION_USER, REMOVE_CONVERSATION_USER } from './constants';
 
 const UsersReducer = (state, action) => {
   switch (action.type) {
