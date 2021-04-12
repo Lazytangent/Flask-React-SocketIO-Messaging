@@ -9,7 +9,11 @@ interface Action {
   users?: User[];
 }
 
-interface SetUserAction {
+interface SetUsersAction extends Action {
+  users: User[];
+}
+
+interface SetUserAction extends Action {
   type: string;
   user: User;
 }
@@ -19,7 +23,7 @@ interface RemoveAction {
 }
 
 interface InitialState {
-  user?: User;
+  user?: User | null;
 }
 
 const setSession = (user: User): SetUserAction => ({
@@ -58,7 +62,7 @@ export const login = (credential: string, password: string) => async (dispatch: 
   return user;
 };
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async (dispatch: AppDispatch) => {
   const res: Response = await fetch('/api/auth/logout');
   if (res.ok) {
     dispatch(removeSession());
