@@ -4,7 +4,7 @@ import {
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
-import sessionReducer from './session.ts';
+import sessionReducer from './session';
 
 const rootReducer = combineReducers({
   session: sessionReducer,

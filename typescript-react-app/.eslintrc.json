@@ -20,5 +20,26 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "react/jsx-filename-extension": [2, {
+            "extensions": [
+                ".jsx",
+                ".tsx"
+            ]
+        }],
+        "react/react-in-jsx-scope": "off",
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": ["error"],
+        "import/extensions": ["warn", {
+            "tsx": "never",
+            "ts": "never"
+        }],
+        "object-curly-newline": "warn"
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", "jsx", ".ts", ".tsx"]
+            }
+        }
     }
 }

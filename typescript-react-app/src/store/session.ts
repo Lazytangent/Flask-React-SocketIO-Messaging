@@ -5,6 +5,13 @@ interface User {
   username: string;
   email: string;
   id: number;
+  errors?: string[];
+}
+
+interface Action {
+  type: string;
+  user?: User;
+  users?: User[];
 }
 
 interface SetUserAction {
@@ -14,6 +21,10 @@ interface SetUserAction {
 
 interface RemoveAction {
   type: string;
+}
+
+interface InitialState {
+
 }
 
 const setSession = (user: User): SetUserAction => ({
@@ -51,3 +62,14 @@ export const login = (credential: string, password: string) => async (dispatch) 
   }
   return user;
 };
+
+const initialState: InitialState = {};
+
+const sessionReducer = (state: InitialState = initialState, action: Action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+
+export default sessionReducer;
