@@ -1,14 +1,7 @@
-import { AppDispatch } from '../types';
+import { AppDispatch, User } from '../types';
 
 const SET_SESSION: string = 'session/SET_SESSION';
 const REMOVE_SESSION: string = 'session/REMOVE_SESSION';
-
-interface User {
-  username: string;
-  email: string;
-  id: number;
-  errors?: string[];
-}
 
 interface Action {
   type: string;
