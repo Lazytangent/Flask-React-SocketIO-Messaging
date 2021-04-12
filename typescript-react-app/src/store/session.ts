@@ -36,7 +36,7 @@ const removeSession = (): RemoveAction => ({
   type: REMOVE_SESSION,
 });
 
-export const authenticate = () => async (dispatch) => {
+export const authenticate = () => async (dispatch: any) => {
   const res: Response = await fetch('/api/auth');
   const user: User = await res.json();
   if (!user.errors) {
@@ -45,7 +45,7 @@ export const authenticate = () => async (dispatch) => {
   return user;
 };
 
-export const login = (credential: string, password: string) => async (dispatch) => {
+export const login = (credential: string, password: string) => async (dispatch: any) => {
   const res: Response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
