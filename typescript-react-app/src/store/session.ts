@@ -51,3 +51,7 @@ export const login = (credential: string, password: string) => async (dispatch) 
   }
   return user;
 };
+
+export const logout = () => async (dispatch) => {
+
+};

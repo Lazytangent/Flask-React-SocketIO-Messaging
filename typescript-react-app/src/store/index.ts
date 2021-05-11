@@ -4,7 +4,7 @@ import {
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
-import sessionReducer from './session.ts';
+import sessionReducer from './session';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -29,8 +29,13 @@ interface HydratedState {
   },
 }
 
-const configureStore = (preloadedState: HydratedState) => {
-  createStore(rootReducer, preloadedState, enhancer);
+const configureStore = (preloadedState: HydratedState)  => {
+  return createStore(rootReducer, preloadedState, enhancer);
 };
 
-export default configureStore;
+const store = configureStore();
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export default store;
