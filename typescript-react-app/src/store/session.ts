@@ -37,7 +37,9 @@ export const authenticate = () => async (dispatch: AppDispatch) => {
   return user;
 };
 
-export const login = (credential: string, password: string) => async (dispatch: AppDispatch) => {
+export const login = (credential: string, password: string) => async (
+  dispatch: AppDispatch,
+) => {
   const res: Response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
@@ -63,7 +65,12 @@ export const logout = () => async (dispatch: AppDispatch) => {
   return res.json();
 };
 
-export const signUp = (username, email, password, confirmPassword) => async (dispatch: AppDispatch) => {
+export const signUp = (
+  username: string,
+  email: string,
+  password: string,
+  confirmPassword: string,
+) => async (dispatch: AppDispatch) => {
   const res: Response = await fetch('/api/auth/signup', {
     method: 'POST',
     headers: {
