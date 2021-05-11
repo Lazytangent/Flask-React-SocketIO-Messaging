@@ -1,3 +1,5 @@
+import type { AppDispatch } from './index';
+
 const SET_SESSION: string = 'session/SET_SESSION';
 const REMOVE_SESSION: string = 'session/REMOVE_SESSION';
 
@@ -5,6 +7,7 @@ interface User {
   username: string;
   email: string;
   id: number;
+  errors?: string[];
 }
 
 interface SetUserAction {
@@ -25,7 +28,7 @@ const removeSession = (): RemoveAction => ({
   type: REMOVE_SESSION,
 });
 
-export const authenticate = () => async (dispatch) => {
+export const authenticate = () => async (dispatch: AppDispatch) => {
   const res: Response = await fetch('/api/auth');
   const user: User = await res.json();
   if (!user.errors) {
@@ -34,7 +37,7 @@ export const authenticate = () => async (dispatch) => {
   return user;
 };
 
-export const login = (credential: string, password: string) => async (dispatch) => {
+export const login = (credential: string, password: string) => async (dispatch: AppDispatch) => {
   const res: Response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
@@ -52,7 +55,7 @@ export const login = (credential: string, password: string) => async (dispatch) 
   return user;
 };
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async (dispatch: AppDispatch) => {
   const res: Response = await fetch('/api/auth/logout');
   if (res.ok) {
     dispatch(removeSession());
@@ -60,3 +63,44 @@ export const logout = () => async (dispatch) => {
   return res.json();
 };
 
+export const signUp = (username, email, password, confirmPassword) => async (dispatch: AppDispatch) => {
+  const res: Response = await fetch('/api/auth/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username,
+      email,
+      password,
+      confirm_password: confirmPassword,
+    }),
+  });
+  const user: User = await res.json();
+  if (!user.errors) {
+    dispatch(setSession(user));
+  }
+  return user;
+};
+
+const initialState = {
+  user: null,
+};
+
+interface Action {
+  type: string;
+  user?: User;
+}
+
+const sessionReducer = (state = initialState, action: Action) => {
+  switch (action.type) {
+    case SET_SESSION:
+      return { ...state, user: action.user };
+    case REMOVE_SESSION:
+      return { ...state, user: null };
+    default:
+      return state;
+  }
+};
+
+export default sessionReducer;
