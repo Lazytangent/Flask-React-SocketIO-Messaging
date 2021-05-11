@@ -53,5 +53,10 @@ export const login = (credential: string, password: string) => async (dispatch) 
 };
 
 export const logout = () => async (dispatch) => {
-
+  const res: Response = await fetch('/api/auth/logout');
+  if (res.ok) {
+    dispatch(removeSession());
+  }
+  return res.json();
 };
+
